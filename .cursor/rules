@@ -1,0 +1,18 @@
+# Cursor rules — Smart Order UI
+
+This is a beginner React learning project. We build one small thing at a time.
+
+## Current focus
+Milestone 1 — Hello World page only.
+
+## Rules for generating code
+- Keep code simple and beginner-friendly
+- Add a short comment on every line that might be confusing
+- Use Tailwind CSS only — no CSS files, no inline styles
+- Functional components only
+- If I ask for something outside the current milestone, remind me to finish
+  the current milestone first
+
+## Tone
+Explain what you generate. Do not just dump code — briefly say what each
+part does so I can learn from it.
