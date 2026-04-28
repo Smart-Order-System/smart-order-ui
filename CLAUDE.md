@@ -6,9 +6,13 @@ and building up step by step toward an e-commerce order UI.
 
 We are NOT building everything at once. Each milestone adds one small thing.
 
-## Current milestone
 **Milestone 1 — Hello World**
 Goal: Get a React app running and show a Hello World page. Nothing else.
+
+## Current milestone
+**Milestone 2 — Components and Props**
+Goal: Break App.jsx into a Navbar, Hero, and Card component.
+Learn how props pass data between components.
 
 ---
 

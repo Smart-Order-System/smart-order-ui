@@ -1,122 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// App.jsx
+// This is the root component — it assembles all smaller components
+// Notice how App.jsx is now clean and easy to read
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navbar from './components/Navbar'
+import Hero   from './components/Hero'
+import Card   from './components/Card'
 
+// This is the data we want to show in our cards
+// Putting data in an array like this makes it easy to add more later
+const features = [
+  {
+    id: 1,
+    icon: '📦',
+    title: 'Browse Products',
+    description: 'Explore our full catalog of retail products.',
+  },
+  {
+    id: 2,
+    icon: '🛒',
+    title: 'Place Orders',
+    description: 'Add items to your cart and check out in seconds.',
+  },
+  {
+    id: 3,
+    icon: '🚚',
+    title: 'Track Delivery',
+    description: 'Follow your order from warehouse to doorstep.',
+  },
+  {
+    id: 4,
+    icon: '🧾',
+    title: 'Order History',
+    description: 'Review past orders, reorder favorites, and download receipts anytime.',
+  },
+]
+
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-gray-50">
 
-      <div className="ticks"></div>
+      {/* Navbar sits at the very top */}
+      <Navbar />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Hero section with title and subtitle passed as props */}
+      <Hero
+        title="Welcome to Smart Order"
+        subtitle="Your one-stop shop for retail orders"
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      {/* Card grid — we loop over the features array to create 3 cards */}
+      <div className="max-w-4xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          {features.map(feature => (
+            <Card
+              key={feature.id}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+            />
+          ))}
+
+        </div>
+      </div>
+
+    </div>
   )
 }
-
-export default App
