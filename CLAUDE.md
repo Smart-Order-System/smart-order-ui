@@ -9,11 +9,15 @@ We are NOT building everything at once. Each milestone adds one small thing.
 **Milestone 1 — Hello World**
 Goal: Get a React app running and show a Hello World page. Nothing else.
 
-## Current milestone
 **Milestone 2 — Components and Props**
 Goal: Break App.jsx into a Navbar, Hero, and Card component.
 Learn how props pass data between components.
 
+## Current milestone
+**Milestone 3 — State and Interaction**
+Goal: Make the page interactive using useState.
+Add a working cart counter, a toggle, and a simple form.
+No API calls yet — all state lives in the browser only.
 ---
 
 ## Tech stack
