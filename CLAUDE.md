@@ -13,11 +13,16 @@ Goal: Get a React app running and show a Hello World page. Nothing else.
 Goal: Break App.jsx into a Navbar, Hero, and Card component.
 Learn how props pass data between components.
 
-## Current milestone
 **Milestone 3 — State and Interaction**
 Goal: Make the page interactive using useState.
 Add a working cart counter, a toggle, and a simple form.
 No API calls yet — all state lives in the browser only.
+
+## Current milestone
+**Milestone 4 — Fetch Real Data**
+Goal: Call a free public API and display real products on screen.
+Handle loading and error states properly.
+No backend connection yet — using a free public API as a stand-in.
 ---
 
 ## Tech stack
