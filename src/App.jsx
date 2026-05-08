@@ -1,50 +1,81 @@
 // App.jsx
-import { useState } from 'react'   // useState comes from React itself
+import { useState, useEffect } from 'react'  // add useEffect here
 
-import Navbar    from './components/Navbar'
-import Hero      from './components/Hero'
-import Card      from './components/Card'
+import Navbar      from './components/Navbar'
+import Hero        from './components/Hero'
+import ProductGrid from './components/ProductGrid'
+import OrderForm   from './components/OrderForm'
 
-const features = [
-  { id: 1, icon: '📦', title: 'Browse Products',  description: 'Explore our full catalog.' },
-  { id: 2, icon: '🛒', title: 'Place Orders',     description: 'Check out in seconds.'     },
-  { id: 3, icon: '🚚', title: 'Track Delivery',   description: 'Follow your order live.'   },
-]
+const API_URL = 'https://fakestoreapi.com/products'
 
 export default function App() {
-  // useState returns two things:
-  // 1. the current value (cartCount)
-  // 2. a function to update it (setCartCount)
-  const [cartCount, setCartCount] = useState(0)  // 0 is the starting value
+  const [cartCount, setCartCount] = useState(0)
 
-  // This function adds one item to the cart
-  // We pass it DOWN to Card so Card can trigger it on button click
-  function handleAddToCart() {
-    setCartCount(cartCount + 1)
+  // Three state variables for the data fetch lifecycle
+  const [products, setProducts] = useState([])     // the actual data
+  const [loading, setLoading]   = useState(true)   // are we waiting?
+  const [error, setError]       = useState(null)   // did something go wrong?
+
+  // useEffect runs AFTER the component first appears on screen
+  // The empty [] means "only run this once, when the page loads"
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        setLoading(true)
+        setError(null)
+
+        const response = await fetch(API_URL)
+
+        // Check if the server returned an error status
+        if (!response.ok) {
+          throw new Error(`Failed to load products (${response.status})`)
+        }
+
+        const data = await response.json()
+        setProducts(data)
+
+      } catch (err) {
+        setError(err.message || 'Something went wrong. Please try again.')
+      } finally {
+        setLoading(false)  // always stop loading, success or fail
+      }
+    }
+
+    fetchProducts()
+  }, [])  // empty array = run once on mount
+
+  function handleAddToCart(product) {
+    setCartCount(prev => prev + 1)
+    console.log('Added to cart:', product.title)
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
 
-      {/* Pass cartCount UP to Navbar so it can display the badge */}
       <Navbar cartCount={cartCount} />
 
       <Hero
-        title="Welcome to Smart Order"
-        subtitle="Your one-stop shop for retail orders"
+        title="Our Products"
+        subtitle="Browse our full catalog below"
       />
 
-      <div className="max-w-4xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map(feature => (
-            <Card
-              key={feature.id}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-              onAddToCart={handleAddToCart}  // pass the function DOWN to Card
-            />
-          ))}
+      {/* Products section */}
+      <div className="max-w-6xl mx-auto px-6 pb-12">
+        <ProductGrid
+          products={products}
+          loading={loading}
+          error={error}
+          onAddToCart={handleAddToCart}
+        />
+      </div>
+
+      {/* Order form section */}
+      <div className="max-w-6xl mx-auto px-6 pb-20">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6">
+          Ready to order?
+        </h2>
+        <div className="max-w-md">
+          <OrderForm />
         </div>
       </div>
 
