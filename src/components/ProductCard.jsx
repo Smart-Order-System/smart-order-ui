@@ -30,15 +30,16 @@ export default function ProductCard({ product, onAddToCart }) {
             {product.title}
           </h3>
   
-          {/* Price and button */}
-          <div className="flex items-center justify-between mt-2">
-            <span className="text-lg font-bold text-gray-900">
+          {/* Price + primary action */}
+          <div className="mt-auto pt-3 border-t border-gray-100">
+            <span className="text-lg font-bold text-gray-900 block mb-3">
               ${product.price.toFixed(2)}
             </span>
             <button
-              onClick={() => onAddToCart(product)}
-              className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium
-                         rounded-lg hover:bg-blue-700 transition-colors"
+              type="button"
+              onClick={() => onAddToCart?.(product)}
+              className="w-full px-3 py-2.5 bg-blue-600 text-white text-sm font-medium
+                         rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"
             >
               Add to cart
             </button>
